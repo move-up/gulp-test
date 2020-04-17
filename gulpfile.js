@@ -9,7 +9,8 @@ const browserSync = require('browser-sync');
 const uglify = require('gulp-uglify');
 // 压缩图片
 const imagemin = require('gulp-imagemin');
-const pngquant = require('imagemin-pngquant'); //png图片压缩插件
+//png图片压缩插件
+const pngquant = require('imagemin-pngquant'); 
 // 自动刷新
 const livereload = require('gulp-livereload');
 
@@ -30,11 +31,6 @@ gulp.task('BrowserSync', function(){
 });
 
 // 预编译sass
-// gulp.task('Sass', function(){
-//   return gulp.src('./src/sass/**/*.scss')
-//     .pipe(sass())
-//     .pipe(gulp.dest('./dist/css'))
-// });
 gulp.task('Sass', function() {
   return gulp.src('./src/sass/**/*.scss')
     .pipe(sass())
@@ -63,20 +59,20 @@ gulp.task('MinifyJs', function () {
 // img
 gulp.task('MinifyImg', function () {
   return gulp.src('./src/img/*')
-      .pipe(imagemin({
-          progressive: true,
-          use: [pngquant()] //使用pngquant来压缩png图片
-      }))
-      .pipe(gulp.dest('./dist/img'))
-      .pipe(livereload());
+    .pipe(imagemin({
+      progressive: true,
+      use: [pngquant()] //使用pngquant来压缩png图片
+    }))
+    .pipe(gulp.dest('./dist/img'))
+    .pipe(livereload());
 });
 
 //定义livereload任务
-gulp.task('connect', function () {
-  connect.server({
-      livereload: true
-   });
-});
+// gulp.task('connect', function () {
+//   connect.server({
+//       livereload: true
+//    });
+// });
 
 
 gulp.task('watch', function() {
@@ -86,8 +82,10 @@ gulp.task('watch', function() {
   // 启动Browsersync服务
   browserSync.init({      
     server: {
-        baseDir: './dist',   // 启动服务的目录 默认 index.html    
-        index: 'index.html' // 自定义启动文件名
+      // 启动服务的目录 默认 index.html
+      baseDir: './dist',   
+      // 自定义启动文件名    
+      index: 'index.html' 
     },
     // 决定Browsersync启动时自动打开的网址 external 表示 可外部打开 url, 可以在同一 wifi 下不同终端测试
     open: 'external', 
